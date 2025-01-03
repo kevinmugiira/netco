@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: inventory-service
+
+  datasource:
+    url: jdbc:mysql://localhost:3307/Netco_microservices
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: Rootroot@1045
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+
+
+server:
+  port: 8083

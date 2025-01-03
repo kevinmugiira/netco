@@ -1,0 +1,5 @@
+/home/kevin-m/IntellijProjects/netco/inventory-service/src/main/java/com/netco/microservices/inventory_service/InventoryServiceApplication.java
+/home/kevin-m/IntellijProjects/netco/inventory-service/src/main/java/com/netco/microservices/inventory_service/controller/InventoryController.java
+/home/kevin-m/IntellijProjects/netco/inventory-service/src/main/java/com/netco/microservices/inventory_service/model/Inventory.java
+/home/kevin-m/IntellijProjects/netco/inventory-service/src/main/java/com/netco/microservices/inventory_service/repository/InventoryRepository.java
+/home/kevin-m/IntellijProjects/netco/inventory-service/src/main/java/com/netco/microservices/inventory_service/service/InventoryService.java

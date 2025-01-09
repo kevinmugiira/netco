@@ -12,19 +12,25 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
-@Slf4j
+//@RequiredArgsConstructor
+//@Slf4j
 public class ProductService {
     private final ProductRepository productRepository;
 
+    public ProductService(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
+
     public ProductResponse createProduct(ProductRequest productRequest) {
-        Product product = Product.builder()
-                .name(productRequest.name())
-                .description(productRequest.description())
-                .price(productRequest.price())
-                .build();
+        Product product = new Product(
+                null,
+                productRequest.name(),
+                productRequest.description(),
+                productRequest.price());
+//                .build();
         productRepository.save(product);
-        log.info("Product created successfully!");
+        System.out.println("Product created successfully");
+//        log.info("Product created successfully!");
         return new ProductResponse(
                 product.getId(),
                 product.getName(),

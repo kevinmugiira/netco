@@ -3,15 +3,18 @@ spring:
     name: inventory-service
 
   datasource:
-    url: jdbc:mysql://localhost:3307/Netco_microservices
+    url: jdbc:mysql://localhost:3308/Netco_microservices
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: Rootroot@1045
   jpa:
     hibernate:
-      ddl-auto: update
-
-
+      ddl-auto: create-drop
 
 server:
-  port: 8083
+  port: 0
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/

@@ -1,0 +1,8 @@
+com\netco\microservices\prod_service\dto\ProductResponse.class
+com\netco\microservices\prod_service\repository\ProductRepository.class
+com\netco\microservices\prod_service\model\Product$ProductBuilder.class
+com\netco\microservices\prod_service\service\ProductService.class
+com\netco\microservices\prod_service\dto\ProductRequest.class
+com\netco\microservices\prod_service\controller\ProductController.class
+com\netco\microservices\prod_service\model\Product.class
+com\netco\microservices\prod_service\ProductServiceApplication.class

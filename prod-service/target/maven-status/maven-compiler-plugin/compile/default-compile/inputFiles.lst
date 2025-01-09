@@ -1,7 +1,7 @@
-/home/kevin-m/IntellijProjects/netco/prod-service/src/main/java/com/netco/microservices/product_service/ProductServiceApplication.java
-/home/kevin-m/IntellijProjects/netco/prod-service/src/main/java/com/netco/microservices/product_service/controller/ProductController.java
-/home/kevin-m/IntellijProjects/netco/prod-service/src/main/java/com/netco/microservices/product_service/dto/ProductRequest.java
-/home/kevin-m/IntellijProjects/netco/prod-service/src/main/java/com/netco/microservices/product_service/dto/ProductResponse.java
-/home/kevin-m/IntellijProjects/netco/prod-service/src/main/java/com/netco/microservices/product_service/model/Product.java
-/home/kevin-m/IntellijProjects/netco/prod-service/src/main/java/com/netco/microservices/product_service/repository/ProductRepository.java
-/home/kevin-m/IntellijProjects/netco/prod-service/src/main/java/com/netco/microservices/product_service/service/ProductService.java
+C:\Users\jmugiira\IdeaProjects\netco\prod-service\src\main\java\com\netco\microservices\prod_service\controller\ProductController.java
+C:\Users\jmugiira\IdeaProjects\netco\prod-service\src\main\java\com\netco\microservices\prod_service\dto\ProductRequest.java
+C:\Users\jmugiira\IdeaProjects\netco\prod-service\src\main\java\com\netco\microservices\prod_service\dto\ProductResponse.java
+C:\Users\jmugiira\IdeaProjects\netco\prod-service\src\main\java\com\netco\microservices\prod_service\model\Product.java
+C:\Users\jmugiira\IdeaProjects\netco\prod-service\src\main\java\com\netco\microservices\prod_service\ProductServiceApplication.java
+C:\Users\jmugiira\IdeaProjects\netco\prod-service\src\main\java\com\netco\microservices\prod_service\repository\ProductRepository.java
+C:\Users\jmugiira\IdeaProjects\netco\prod-service\src\main\java\com\netco\microservices\prod_service\service\ProductService.java

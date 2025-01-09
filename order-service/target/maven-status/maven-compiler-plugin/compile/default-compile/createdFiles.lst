@@ -1,8 +1,8 @@
-com/netco/microservices/order_service/controller/OrderController.class
-com/netco/microservices/order_service/repository/OrderRepository.class
-com/netco/microservices/order_service/OrderServiceApplication.class
-com/netco/microservices/order_service/dto/OrderRequest.class
-com/netco/microservices/order_service/model/OrderLineItems.class
-com/netco/microservices/order_service/model/Order.class
-com/netco/microservices/order_service/service/OrderService.class
-com/netco/microservices/order_service/dto/OrderLineItemsDto.class
+com\netco\microservices\order_service\dto\OrderRequest.class
+com\netco\microservices\order_service\model\Order.class
+com\netco\microservices\order_service\service\OrderService.class
+com\netco\microservices\order_service\model\OrderLineItems.class
+com\netco\microservices\order_service\OrderServiceApplication.class
+com\netco\microservices\order_service\controller\OrderController.class
+com\netco\microservices\order_service\dto\OrderLineItemsDto.class
+com\netco\microservices\order_service\repository\OrderRepository.class

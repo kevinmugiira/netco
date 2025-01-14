@@ -16,10 +16,10 @@
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
         </processorPath>
         <module name="api-gateway" />
-        <module name="inventory-service" />
-        <module name="prod-service" />
         <module name="discovery-server" />
+        <module name="inventory-service" />
         <module name="order-service" />
+        <module name="prod-service" />
       </profile>
     </annotationProcessing>
   </component>

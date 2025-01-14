@@ -1,5 +1,6 @@
 package com.netco.microservices.order_service.service;
 
+import com.netco.microservices.order_service.client.InventoryClient;
 import com.netco.microservices.order_service.dto.InventoryResponse;
 import com.netco.microservices.order_service.dto.OrderLineItemsDto;
 import com.netco.microservices.order_service.dto.OrderRequest;
@@ -8,11 +9,13 @@ import com.netco.microservices.order_service.model.OrderLineItems;
 import com.netco.microservices.order_service.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -23,12 +26,14 @@ import java.util.UUID;
 public class OrderService {
 
     private final OrderRepository orderRepository;
-    private final WebClient.Builder webClientBuilder;
+
+    private final InventoryClient inventoryClient;
+//    private final WebClient.Builder webClientBuilder;
 //    private final WebClient webClient;
 
-    public OrderService(OrderRepository orderRepository, WebClient.Builder webClientBuilder) {
+    public OrderService(OrderRepository orderRepository, InventoryClient inventoryClient) {
         this.orderRepository = orderRepository;
-        this.webClientBuilder = webClientBuilder;
+        this.inventoryClient = inventoryClient;
 //        this.webClient = webClient;
     }
 
@@ -62,19 +67,25 @@ public class OrderService {
          * call the inventory service and ensure
          * that the product is in stock
          */
-        InventoryResponse[] inventoryResponseArray = webClientBuilder.build().get()
-                .uri("http://inventory-service/api/inventory",
-                        uriBuilder -> uriBuilder.queryParam("skuCode", skuCodes).build())
-                .retrieve()
-                .bodyToMono(InventoryResponse[].class)
-                .block(); //block identifies the call as synchronous
+//        InventoryResponse[] inventoryResponseArray = webClientBuilder.build().get()
+//                .uri("http://inventory-service/api/inventory",
+//                        uriBuilder -> uriBuilder.queryParam("skuCode", skuCodes).build())
+//                .retrieve()
+//                .bodyToMono(InventoryResponse[].class)
+//                .block(); //block identifies the call as synchronous
 
+//
+//        boolean allProductsIsInStock = Arrays
+//                .stream(inventoryResponseArray)
+//                .allMatch(InventoryResponse::getIsInStock); //inventoryResponse -> inventoryResponse.isInStock()
 
-        boolean allProductsIsInStock = Arrays
-                .stream(inventoryResponseArray)
-                .allMatch(InventoryResponse::getIsInStock); //inventoryResponse -> inventoryResponse.isInStock()
+        List<InventoryResponse> inventoryResponseArray = inventoryClient.isInStock(skuCodes);
+        boolean allProductsAreInStock = inventoryResponseArray
+                .stream()
+                .allMatch(InventoryResponse::getIsInStock);
+//                inventoryClient.isInStock(skuCodes);
 
-        if (allProductsIsInStock) {
+        if (allProductsAreInStock) {
             orderRepository.save(order);
         } else {
             throw new IllegalArgumentException("Product is not in stock, please try again later!");

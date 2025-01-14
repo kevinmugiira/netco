@@ -1,5 +1,6 @@
 com\netco\microservices\inventory_service\repository\InventoryRepository.class
 com\netco\microservices\inventory_service\InventoryServiceApplication.class
-com\netco\microservices\inventory_service\controller\InventoryController.class
-com\netco\microservices\inventory_service\service\InventoryService.class
 com\netco\microservices\inventory_service\model\Inventory.class
+com\netco\microservices\inventory_service\controller\InventoryController.class
+com\netco\microservices\inventory_service\dto\InventoryResponse.class
+com\netco\microservices\inventory_service\service\InventoryService.class

@@ -1,6 +1,8 @@
-C:\Users\jmugiira\IdeaProjects\netco\inventory-service\src\main\java\com\netco\microservices\inventory_service\controller\InventoryController.java
-C:\Users\jmugiira\IdeaProjects\netco\inventory-service\src\main\java\com\netco\microservices\inventory_service\dto\InventoryResponse.java
-C:\Users\jmugiira\IdeaProjects\netco\inventory-service\src\main\java\com\netco\microservices\inventory_service\InventoryServiceApplication.java
-C:\Users\jmugiira\IdeaProjects\netco\inventory-service\src\main\java\com\netco\microservices\inventory_service\model\Inventory.java
-C:\Users\jmugiira\IdeaProjects\netco\inventory-service\src\main\java\com\netco\microservices\inventory_service\repository\InventoryRepository.java
-C:\Users\jmugiira\IdeaProjects\netco\inventory-service\src\main\java\com\netco\microservices\inventory_service\service\InventoryService.java
+/home/kevin-m/IdeaProjects/netco/inventory-service/src/main/java/com/netco/microservices/inventory_service/InventoryServiceApplication.java
+/home/kevin-m/IdeaProjects/netco/inventory-service/src/main/java/com/netco/microservices/inventory_service/config/CorsConfig.java
+/home/kevin-m/IdeaProjects/netco/inventory-service/src/main/java/com/netco/microservices/inventory_service/config/OpenAPIConfig.java
+/home/kevin-m/IdeaProjects/netco/inventory-service/src/main/java/com/netco/microservices/inventory_service/controller/InventoryController.java
+/home/kevin-m/IdeaProjects/netco/inventory-service/src/main/java/com/netco/microservices/inventory_service/dto/InventoryResponse.java
+/home/kevin-m/IdeaProjects/netco/inventory-service/src/main/java/com/netco/microservices/inventory_service/model/Inventory.java
+/home/kevin-m/IdeaProjects/netco/inventory-service/src/main/java/com/netco/microservices/inventory_service/repository/InventoryRepository.java
+/home/kevin-m/IdeaProjects/netco/inventory-service/src/main/java/com/netco/microservices/inventory_service/service/InventoryService.java

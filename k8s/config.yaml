@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: netco-config
+  namespace: netco
+data:
+  KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+  SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/Netco_microservices
+  SPRING_DATASOURCE_USERNAME: netco
+  INVENTORY_URL: http://inventory-service:8083
+  EMAIL_FROM: onboarding@resend.dev
+  SHIP_FROM_COUNTRY: US
+  SHIP_PARCEL_WEIGHT: "1"

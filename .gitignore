@@ -1,0 +1,3 @@
+**/target/
+secrets.yaml
+k8s/secrets.yaml

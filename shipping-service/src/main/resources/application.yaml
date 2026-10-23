@@ -1,0 +1,45 @@
+spring:
+  application:
+    name: shipping-service
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    consumer:
+      auto-offset-reset: earliest
+      enable-auto-commit: false
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.value.default.type: com.netco.microservices.shipping.event.OrderPlacedEvent
+        spring.json.trusted.packages: com.netco.microservices.shipping.event
+    listener:
+      ack-mode: record
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3308/Netco_microservices}
+    username: ${SPRING_DATASOURCE_USERNAME:root}
+    password: ${SPRING_DATASOURCE_PASSWORD:}
+  jpa:
+    hibernate:
+      ddl-auto: update
+server:
+  port: ${SERVER_PORT:8085}
+shippo:
+  test-token: ${SHIPPO_TEST_TOKEN:}
+  from:
+    name: ${SHIP_FROM_NAME:Netco Practice Store}
+    street1: ${SHIP_FROM_STREET:}
+    city: ${SHIP_FROM_CITY:}
+    state: ${SHIP_FROM_STATE:}
+    zip: ${SHIP_FROM_ZIP:}
+    country: ${SHIP_FROM_COUNTRY:US}
+    phone: ${SHIP_FROM_PHONE:}
+  parcel:
+    weight: ${SHIP_PARCEL_WEIGHT:1}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus,metrics
+  endpoint:
+    health:
+      probes:
+        enabled: true

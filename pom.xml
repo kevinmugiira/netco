@@ -21,6 +21,8 @@
         <module>prod-service</module>
         <module>discovery-server</module>
         <module>api-gateway</module>
+        <module>notification-service</module>
+        <module>shipping-service</module>
     </modules>
 
     <properties>

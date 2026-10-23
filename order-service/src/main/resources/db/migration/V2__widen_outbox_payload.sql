@@ -1,0 +1,1 @@
+ALTER TABLE outbox_events MODIFY COLUMN payload LONGTEXT NOT NULL;

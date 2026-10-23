@@ -6,11 +6,15 @@ import com.netco.microservices.order_service.dto.OrderLineItemsDto;
 import com.netco.microservices.order_service.dto.OrderRequest;
 import com.netco.microservices.order_service.model.Order;
 import com.netco.microservices.order_service.model.OrderLineItems;
+import com.netco.microservices.order_service.model.OutboxEvent;
 import com.netco.microservices.order_service.repository.OrderRepository;
+import com.netco.microservices.order_service.repository.OutboxEventRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.stereotype.Service;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -28,20 +32,32 @@ public class OrderService {
     private final OrderRepository orderRepository;
 
     private final InventoryClient inventoryClient;
+    private final OutboxEventRepository outboxRepository;
+    private final ObjectMapper objectMapper;
 //    private final WebClient.Builder webClientBuilder;
 //    private final WebClient webClient;
 
-    public OrderService(OrderRepository orderRepository, InventoryClient inventoryClient) {
+    public OrderService(OrderRepository orderRepository, InventoryClient inventoryClient,
+                        OutboxEventRepository outboxRepository, ObjectMapper objectMapper) {
         this.orderRepository = orderRepository;
         this.inventoryClient = inventoryClient;
+        this.outboxRepository = outboxRepository;
+        this.objectMapper = objectMapper;
 //        this.webClient = webClient;
     }
 
     public void placeOrder(OrderRequest orderRequest) {
+        if (orderRequest == null) {
+            throw new IllegalArgumentException("orderRequest is null");
+        }
         if (orderRequest.getOrderLineItemsDtoList() == null) {
             throw new IllegalArgumentException("OrderLineItemsDtoList is null");
-        } else if (orderRequest == null) {
-            throw new IllegalArgumentException("orderRequest is null");
+        }
+        if (orderRequest.getCustomerEmail() == null || orderRequest.getCustomerEmail().isBlank()) {
+            throw new IllegalArgumentException("customerEmail is required");
+        }
+        if (orderRequest.getShippingAddress() == null) {
+            throw new IllegalArgumentException("shippingAddress is required");
         }
 
 
@@ -86,7 +102,18 @@ public class OrderService {
 //                inventoryClient.isInStock(skuCodes);
 
         if (allProductsAreInStock) {
-            orderRepository.save(order);
+            Order savedOrder = orderRepository.save(order);
+            OrderPlacedEvent event = new OrderPlacedEvent(
+                    savedOrder.getOrderNumber(), orderRequest.getCustomerEmail(), orderRequest.getShippingAddress(),
+                    savedOrder.getOrderLineItemsList().stream()
+                            .map(item -> new OrderPlacedEvent.OrderItem(
+                                    item.getSkuCode(), item.getPrice(), item.getQuantity()))
+                            .toList());
+            try {
+                outboxRepository.save(OutboxEvent.pending(savedOrder.getOrderNumber(), objectMapper.writeValueAsString(event)));
+            } catch (JsonProcessingException e) {
+                throw new IllegalStateException("Could not serialize OrderPlaced event", e);
+            }
         } else {
             throw new IllegalArgumentException("Product is not in stock, please try again later!");
         }

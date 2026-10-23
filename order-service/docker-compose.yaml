@@ -1,0 +1,44 @@
+services:
+  kafka:
+    image: apache/kafka:3.7.1
+    container_name: kafka
+    init: true
+    ports:
+      - "9092:9092"
+    volumes:
+      - kafka-data:/var/lib/kafka/data
+    environment:
+      # 1. Enable KRaft
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: 'broker,controller'
+      KAFKA_CONTROLLER_QUORUM_VOTERS: '1@localhost:9093'
+
+      # 2. Configure Listeners
+      KAFKA_LISTENERS: 'INTERNAL://:29092,EXTERNAL://:9092,CONTROLLER://:9093'
+      KAFKA_ADVERTISED_LISTENERS: 'INTERNAL://kafka:29092,EXTERNAL://localhost:9092'
+      KAFKA_CONTROLLER_LISTENER_NAMES: 'CONTROLLER'
+
+      # 3. Security / Rules
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: 'CONTROLLER:PLAINTEXT,INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT'
+      KAFKA_INTER_BROKER_LISTENER_NAME: 'INTERNAL'
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
+  # --- KAFKA WEB PORTAL ---
+  kafka-ui:
+    image: tchiotludo/akhq:latest
+    container_name: kafka-ui
+    ports:
+      - "8180:8080" # Open the web portal at http://localhost:8180
+    environment:
+      AKHQ_CONFIGURATION: |
+        akhq:
+          connections:
+            local-kafka-cluster:
+              properties:
+                bootstrap.servers: "kafka:29092" # Internal listener on Docker network
+    depends_on:
+      - kafka
+
+#      ALLOW_PLAINTEXT_LISTENER: yes
+volumes:
+  kafka-data:
